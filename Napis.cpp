@@ -53,3 +53,25 @@ int Napis::SprawdzNapis(const char * por_napis) const
 	else if (this->m_pszNapis > por_napis) return 1;*/
 	return strcmp(m_pszNapis, por_napis);
 }
+
+bool Napis::operator==(const Napis & wzor)
+{
+	if (this == &wzor)
+		return true;
+	else if (m_nD1 == wzor.m_nD1 && strcmp(m_pszNapis, wzor.m_pszNapis) == 0)
+		return true;
+	else
+		return false;
+
+}
+
+ostream & operator<<(ostream & wy, const Napis & p)
+{
+	wy << p.m_pszNapis;
+	return wy;
+}
+
+istream & operator >> (istream & we, Napis & p)
+{
+	
+}
