@@ -12,6 +12,13 @@ Data::Data()
 }
 
 
+Data::Data(int d, int m, int r)
+{
+	m_nDzien = d;
+	m_nMiesiac = m;
+	m_nRok = r;
+}
+
 Data::~Data()
 {
 }
@@ -77,3 +84,5 @@ void Data::Koryguj()
 	
 
 }
+
+

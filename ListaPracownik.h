@@ -15,9 +15,10 @@ private:
 	int m_nLiczbaPracownikow;
 
 public:
-	void Dodaj(const Pracownik & p);
+	void Dodaj(const Pracownik& p);
 	void WypiszPracownikow() const;
 	void Usun(const Pracownik& wzorzec);
+	const Pracownik* Szukaj(const char* nazwisko, const char* imie) const;
 
 
 };

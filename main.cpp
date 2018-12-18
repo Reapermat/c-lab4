@@ -11,6 +11,8 @@ int main()
 	int z;
 	ListaPracownik listaPracownikow;
 	Pracownik* nowy;
+	Napis imie, nazwisko;
+	
 	/*Pracownik pierwszy;
 	pierwszy.Wpisz();
 	cout << pierwszy.SprawdzImie("Jan");
@@ -20,9 +22,12 @@ int main()
 	*/
 	while (1)
 	{
-		cout << "1.dodaj Pracownik" << endl;
-		cout << "2. wyswietl Pracownik" << endl;
+		cout << "1. dodaj Pracownik" << endl;
+		cout << "2. usun Pracownik" << endl;
+		cout << "3. wyswietl Pracownik" << endl;
+		cout << "4. szukaj pracownika" << endl;
 		cout << "0. zakoncz program" << endl;
+
 		cin >> z;
 		switch (z) 
 		{
@@ -37,7 +42,24 @@ int main()
 		}
 		case 2:
 		{
+			nowy = new Pracownik;
+			nowy->Wpisz();
+			listaPracownikow.Usun(*nowy);
+			break;
+		}
+		case 3:
+		{
 			listaPracownikow.WypiszPracownikow();
+			break;
+		}
+		case 4:
+		{
+			cout << "Podaj imie i nazwisko " << endl;
+			cout << "Imie" <<endl;
+			imie.Wpisz();
+			cout << "Nazwisko: " << endl;
+			nazwisko.Wpisz();		
+			listaPracownikow.Szukaj(nazwisko.Zwroc(), imie.Zwroc());
 			break;
 		}
 		case 0:

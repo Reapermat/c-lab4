@@ -3,6 +3,7 @@ class Data
 {
 public:
 	Data();
+	Data(int d, int m, int r);
 	~Data();
 private:
 	int m_nDzien ;
@@ -18,6 +19,8 @@ public:
 	void Wypisz() const;
 	void Wpisz();
 	int Porownaj(const Data & wzor) const;
+	
+
 
 };
 

@@ -103,7 +103,67 @@ void ListaPracownik::WypiszPracownikow() const
 	}
 }
 
-void ListaPracownik::Usun(const Pracownik & wzorzec)
+void ListaPracownik::Usun(const Pracownik& wzorzec)
 {
+	Pracownik* aktualny = m_pPoczatek;
+	Pracownik* poprzedni = nullptr;
+	if (m_nLiczbaPracownikow == 0)
+	{
+		cout << "Brak Pracownikow" << endl;
 
+	}
+	else
+	{
+		for (int i = 0; i <= m_nLiczbaPracownikow; i++)
+		{
+			if (aktualny->Porownaj(wzorzec) == 0)
+			{
+				if (aktualny == m_pPoczatek)
+				{
+					m_pPoczatek = aktualny->m_pNastepny;
+					m_nLiczbaPracownikow--;
+					return;
+				}
+				else
+				{
+					poprzedni->m_pNastepny = aktualny->m_pNastepny;
+					m_nLiczbaPracownikow--;
+					return;
+				}
+			}
+			else
+			{
+				poprzedni = aktualny;
+				aktualny = aktualny->m_pNastepny;
+			}
+		}
+		cout << "Nie znaleziono podanego pracownika na liscie" << endl;
+	}
+}
+
+const Pracownik * ListaPracownik::Szukaj(const char * nazwisko, const char * imie) const
+{
+	Pracownik* aktualny = m_pPoczatek;
+	if (m_nLiczbaPracownikow == 0)
+	{
+		cout << "nie ma zadnych pracownikow" << endl;
+
+	}
+	else
+	{
+		for (int i = 1; i <= m_nLiczbaPracownikow; i++)
+		{
+			if ((aktualny->SprawdzImie(imie) == 0) && (aktualny->SprawdzNazwisko(nazwisko) == 0))
+			{
+				cout << "znaleziono pracownika" << endl;
+				aktualny->Wypisz();
+				return aktualny;
+			}
+			else
+			{
+				aktualny = aktualny->m_pNastepny;
+			}
+		}
+		return nullptr;
+	}
 }
