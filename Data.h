@@ -1,8 +1,10 @@
 #pragma once
+#include <iostream>
+using namespace std;
+
 class Data
 {
 public:
-	Data();
 	Data(int d, int m, int r);
 	~Data();
 private:
@@ -19,6 +21,8 @@ public:
 	void Wypisz() const;
 	void Wpisz();
 	int Porownaj(const Data & wzor) const;
+	friend ostream& operator <<(ostream & wy, const Data & d);
+	friend istream& operator >> (istream & we, Data &d);
 	
 
 

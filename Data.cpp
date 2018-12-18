@@ -4,14 +4,6 @@
 using namespace std;
 
 
-Data::Data()
-	: m_nDzien(1) 
-	, m_nMiesiac(1)
-	, m_nRok(2000)
-{
-}
-
-
 Data::Data(int d, int m, int r)
 {
 	m_nDzien = d;
@@ -85,4 +77,16 @@ void Data::Koryguj()
 
 }
 
+ostream& operator<<(ostream &wy, const Data &d)
+{
+	wy << d.m_nDzien << d.m_nMiesiac << endl << d.m_nRok;
+	return wy;
+	
+}
 
+istream & operator >> (istream & we, Data & d)
+{
+	we >> d.m_nDzien >> d.m_nMiesiac >> d.m_nRok;
+	d.Koryguj;
+	return we;
+}

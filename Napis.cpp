@@ -5,13 +5,26 @@
 
 using namespace std;
 
-Napis::Napis()
-{
-}
 
+
+
+Napis::Napis(const char * nap)
+{
+	m_nD1 = strlen(nap) + 1;
+	m_pszNapis = new char[m_nD1];
+	strcpy(m_pszNapis, nap);
+}
 
 Napis::~Napis()
 {
+	delete[] m_pszNapis;
+}
+
+Napis::Napis(const Napis & wzor)
+{
+	m_nD1 = wzor.m_nD1;
+	m_pszNapis = new char[m_nD1];
+	strcpy(m_pszNapis, wzor.m_pszNapis);
 }
 
 const char * Napis::Zwroc() const
