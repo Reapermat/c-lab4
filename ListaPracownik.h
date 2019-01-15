@@ -2,6 +2,7 @@
 #include"Data.h"
 #include"Napis.h"
 #include"Pracownik.h"
+#include <fstream>
 
 using namespace std;
 class ListaPracownik
@@ -19,7 +20,9 @@ public:
 	void WypiszPracownikow() const;
 	void Usun(const Pracownik& wzorzec);
 	const Pracownik* Szukaj(const char* nazwisko, const char* imie) const;
-
+	void ZapisDoPliku()const;
+	void WczytajZPliku();
 
 };
+
 

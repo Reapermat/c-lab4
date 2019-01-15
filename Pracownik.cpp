@@ -1,16 +1,19 @@
 #include "Pracownik.h"
-#include "Napis.h"
-#include "Data.h"
-#include "string.h"
-#include <iostream>
+
 
 using namespace std;
 
 
-Pracownik::Pracownik()
+Pracownik::Pracownik(const char* imie, const char* nazwisko, int dzien, int miesiac, int rok):
+	m_DataUrodzenia(dzien, miesiac, rok), m_Imie(imie), m_Nazwisko(nazwisko),
+	m_nIDZatrudnienia(m_nIDZatrudnienia)
 {
 }
 
+Pracownik::Pracownik(const Pracownik &wzor) : m_nIDZatrudnienia(m_nIDZatrudnienia + 1), m_Imie(wzor.m_Imie),
+m_Nazwisko(wzor.m_Nazwisko), m_DataUrodzenia(wzor.m_DataUrodzenia)
+{
+}
 
 Pracownik::~Pracownik()
 {
@@ -54,11 +57,11 @@ void Pracownik::Wypisz() const
 
 void Pracownik::Wpisz()
 {
-	cout << "Imie: " << endl;
+	cout << "Imie: ";
 	m_Imie.Wpisz();
-	cout << "Nazwisko: " << endl;
+	cout << "Nazwisko: " ;
 	m_Nazwisko.Wpisz();
-	cout << "Data urodzenia" << endl;
+	cout << "Data urodzenia: " ;
 	m_DataUrodzenia.Wpisz();
 }
 
@@ -89,4 +92,34 @@ int Pracownik::Porownaj(const Pracownik & wzorzec) const
 
 }
 
+Pracownik & Pracownik::operator=(const Pracownik & wzor)
+{
+	if (this == &wzor)
+		return *this;
+	m_DataUrodzenia = wzor.m_DataUrodzenia;
+	m_Imie = wzor.m_Imie;
+	m_Nazwisko = wzor.m_Nazwisko;
+}
 
+
+bool Pracownik::operator==(const Pracownik & wzor) const
+{
+	if (this == &wzor)
+		return true;
+	if (this->Porownaj(wzor) == 0)
+		return true;
+	else
+		return false;
+}
+
+ostream & operator<<(ostream & wy, const Pracownik & p)
+{
+	wy << p.m_Imie << endl << p.m_Nazwisko << endl << p.m_DataUrodzenia;
+	return wy;
+}
+
+istream & operator>>(istream & we, Pracownik & p)
+{
+	we >> p.m_Imie >> p.m_Nazwisko >> p.m_DataUrodzenia;
+	return we;
+}

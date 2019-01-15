@@ -34,7 +34,7 @@ void ListaPracownik::Dodaj(const Pracownik & p)
 	{
 		if (aktualny->SprawdzNazwisko(k->Nazwisko()) > 0)
 		{
-			m_pPoczatek = new Pracownik(p);
+			m_pPoczatek = k;
 			k->m_pNastepny = aktualny;
 			m_nLiczbaPracownikow++;
 			return;
@@ -53,7 +53,7 @@ void ListaPracownik::Dodaj(const Pracownik & p)
 		nastepny = aktualny->m_pNastepny;
 		if (aktualny->SprawdzNazwisko(k->Nazwisko()) > 0)
 		{
-			m_pPoczatek = new Pracownik(p);
+			m_pPoczatek = k;
 			k->m_pNastepny = aktualny;
 			m_nLiczbaPracownikow++;
 			return;
@@ -161,9 +161,57 @@ const Pracownik * ListaPracownik::Szukaj(const char * nazwisko, const char * imi
 			}
 			else
 			{
+				cout << "nie znaleziono pracownika" << endl;
 				aktualny = aktualny->m_pNastepny;
 			}
 		}
 		return nullptr;
 	}
+}
+
+
+
+void ListaPracownik::ZapisDoPliku()const
+{
+	ofstream plik;
+	plik.open("lista.txt", fstream::out);
+	if (!plik.good())
+	{
+		cout << "Problem z otwarciem pliku docelowego!" << endl;
+	}
+	else
+	{
+		Pracownik* aktualny = m_pPoczatek;
+		for (int i = 0; i < m_nLiczbaPracownikow; i++)
+		{
+			if (aktualny != nullptr)
+			{
+				plik << *aktualny << endl;
+			}
+			aktualny = aktualny->m_pNastepny;
+		}
+	}
+	plik.close();
+}
+
+void ListaPracownik::WczytajZPliku()
+{
+	ifstream plik;
+	plik.open("lista.txt", fstream::out);
+	if (!plik.good())
+	{
+		cout << "Plik z danymi nie istnieje!" << endl;
+	}
+	else
+	{
+		m_nLiczbaPracownikow = 0;
+		m_pPoczatek = nullptr;
+		Pracownik* temp = new Pracownik();
+		while (plik >> *temp)
+		{
+			Dodaj(*temp);
+			temp = new Pracownik();
+		}
+	}
+	plik.close();
 }

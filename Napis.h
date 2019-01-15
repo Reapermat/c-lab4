@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Napis
@@ -18,6 +19,7 @@ public:
 	void Wpisz();
 	int SprawdzNapis(const char* por_napis) const;
 	bool operator==(const Napis & wzor);
+	Napis & operator=(const Napis & wzor);
 	friend ostream & operator<< (ostream & wy, const Napis & p);
 	friend istream & operator >> (istream & we, Napis & p);
 

@@ -19,7 +19,6 @@ Data::~Data()
 void Data::Ustaw(int d, int m, int r)
 {
 	Koryguj();
-
 }
 
 int Data::Dzien() const
@@ -79,7 +78,7 @@ void Data::Koryguj()
 
 ostream& operator<<(ostream &wy, const Data &d)
 {
-	wy << d.m_nDzien << d.m_nMiesiac << endl << d.m_nRok;
+	wy << d.m_nDzien << " " << d.m_nMiesiac << " " << d.m_nRok;
 	return wy;
 	
 }
@@ -87,6 +86,6 @@ ostream& operator<<(ostream &wy, const Data &d)
 istream & operator >> (istream & we, Data & d)
 {
 	we >> d.m_nDzien >> d.m_nMiesiac >> d.m_nRok;
-	d.Koryguj;
+	d.Koryguj();
 	return we;
 }

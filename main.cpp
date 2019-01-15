@@ -26,6 +26,8 @@ int main()
 		cout << "2. usun Pracownik" << endl;
 		cout << "3. wyswietl Pracownik" << endl;
 		cout << "4. szukaj pracownika" << endl;
+		cout << "5. Zapis pracownikow do pliku" << endl;
+		cout << "6. Zapisanie pracownikow z pliku" << endl;
 		cout << "0. zakoncz program" << endl;
 
 		cin >> z;
@@ -60,6 +62,16 @@ int main()
 			cout << "Nazwisko: " << endl;
 			nazwisko.Wpisz();		
 			listaPracownikow.Szukaj(nazwisko.Zwroc(), imie.Zwroc());
+			break;
+		}
+		case 5:
+		{
+			listaPracownikow.ZapisDoPliku();
+			break;
+		}
+		case 6:
+		{
+			listaPracownikow.WczytajZPliku();
 			break;
 		}
 		case 0:

@@ -1,12 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Napis.h"
-#include "string.h"
-#include <iostream>
 
 
 using namespace std;
-
-
-
 
 Napis::Napis(const char * nap)
 {
@@ -34,7 +30,9 @@ const char * Napis::Zwroc() const
 
 void Napis::Ustaw(const char * nowy_napis)
 {
-	strcpy_s(m_pszNapis, nowy_napis);
+	m_nD1 = strlen(nowy_napis) + 1;
+	m_pszNapis = new char[m_nD1];
+	strcpy(m_pszNapis, nowy_napis);
 }
 
 void Napis::Wypisz() const
@@ -44,7 +42,9 @@ void Napis::Wypisz() const
 
 void Napis::Wpisz()
 {
-	cin >> m_pszNapis;
+	string napis;
+	cin >> napis;
+	Ustaw(napis.c_str());
 }
 
 int Napis::SprawdzNapis(const char * por_napis) const
@@ -62,7 +62,16 @@ bool Napis::operator==(const Napis & wzor)
 		return true;
 	else
 		return false;
+}
 
+Napis & Napis::operator=(const Napis & wzor)
+{
+	if (this == &wzor)
+		return *this;
+	m_nD1 = wzor.m_nD1;
+	m_pszNapis = new char[m_nD1];
+	strcpy(m_pszNapis, wzor.m_pszNapis);
+	return *this;
 }
 
 ostream & operator<<(ostream & wy, const Napis & p)
@@ -73,5 +82,10 @@ ostream & operator<<(ostream & wy, const Napis & p)
 
 istream & operator >> (istream & we, Napis & p)
 {
-	
+	string str;
+	we >> str;
+	p.m_nD1 = str.length() + 1;
+	p.m_pszNapis = new char[p.m_nD1];
+	strcpy(p.m_pszNapis, str.c_str());
+	return we;
 }
