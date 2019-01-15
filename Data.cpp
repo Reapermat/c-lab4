@@ -51,7 +51,7 @@ void Data::Wpisz()
 
 int Data::Porownaj(const Data & wzor) const
 {
-	if (this->Dzien() == m_nDzien && this->Miesiac() == m_nMiesiac && this->Rok() == m_nRok) return 0;
+	/*if (this->Dzien() == m_nDzien && this->Miesiac() == m_nMiesiac && this->Rok() == m_nRok) return 0;
 	//else if (this->Dzien() <= m_nDzien && this->Miesiac() <= m_nMiesiac && this->Rok() <= m_nRok) return 1;
 	//else return -1;
 	else if (this->Rok() > m_nRok) return 1;
@@ -59,7 +59,17 @@ int Data::Porownaj(const Data & wzor) const
 	else if (this->Miesiac() > m_nMiesiac) return 1;
 	else if (this->Miesiac() < m_nMiesiac) return -1;
 	else if (this->Dzien() > m_nDzien) return 1;
-	else if (this->Dzien() < m_nDzien) return -1;
+	else if (this->Dzien() < m_nDzien) return -1;*/
+	if (wzor.Rok() > m_nRok) return 1;
+	else if (wzor.Rok() < m_nRok) return -1;
+
+	if (wzor.Miesiac() > m_nMiesiac) return 1;
+	else if (wzor.Miesiac() < m_nMiesiac) return -1;
+
+	if (wzor.Dzien() > m_nDzien) return 1;
+	else if (wzor.Dzien() < m_nDzien) return -1;
+
+	return 0;
 }
 
 void Data::Koryguj()

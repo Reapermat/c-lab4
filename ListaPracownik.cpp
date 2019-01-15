@@ -13,76 +13,64 @@ ListaPracownik::ListaPracownik()
 
 ListaPracownik::~ListaPracownik()
 {
+	Pracownik *aktualny = m_pPoczatek;
+	if (m_nLiczbaPracownikow == 0)
+	{
+		cout << "Lista pracownikow jest pusta!" << endl;
+	}
+	else
+		while (aktualny != nullptr)
+		{
+			aktualny = aktualny->m_pNastepny;
+			delete m_pPoczatek;
+			m_pPoczatek = aktualny;
+
+		}
+
 }
 
 void ListaPracownik::Dodaj(const Pracownik & p)
 {
-	Pracownik *k = new Pracownik(p);
-	Pracownik *aktualny = m_pPoczatek;
-	Pracownik *nastepny;
-	int licznik = 0;
+	Pracownik *pomoc = m_pPoczatek, *pop = nullptr;
 
-	
 	if (m_nLiczbaPracownikow == 0)
 	{
-		m_pPoczatek = new Pracownik(p);
+		Pracownik *k = new Pracownik(p);
+		m_pPoczatek = k;
 		k->m_pNastepny = nullptr;
 		m_nLiczbaPracownikow++;
 		return;
 	}
-	else if (m_nLiczbaPracownikow == 1)
-	{
-		if (aktualny->SprawdzNazwisko(k->Nazwisko()) > 0)
-		{
-			m_pPoczatek = k;
-			k->m_pNastepny = aktualny;
-			m_nLiczbaPracownikow++;
-			return;
 
-		}
-		else if (aktualny->SprawdzNazwisko(k->Nazwisko()) < 0)
+	else {
+		while (pomoc != nullptr)
 		{
-			aktualny->m_pNastepny = k;
-			k->m_pNastepny = nullptr;
-			m_nLiczbaPracownikow++;
-			return;
-		}
-	}
-	else
-	{
-		nastepny = aktualny->m_pNastepny;
-		if (aktualny->SprawdzNazwisko(k->Nazwisko()) > 0)
-		{
-			m_pPoczatek = k;
-			k->m_pNastepny = aktualny;
-			m_nLiczbaPracownikow++;
-			return;
-		}
-		while (licznik <= m_nLiczbaPracownikow)
-		{
-			if (nastepny->SprawdzNazwisko(k->Nazwisko()) > 0)
+			if (pomoc->Porownaj(p) > 0)
 			{
-				aktualny->m_pNastepny = k;
-				k->m_pNastepny = nastepny;
+				Pracownik *k = new Pracownik(p);
+				if (pop)
+				{
+					pop->m_pNastepny = k;
+				}
+				else
+					m_pPoczatek = k;
+				k->m_pNastepny = pomoc;
 				m_nLiczbaPracownikow++;
 				return;
 			}
-			else if (nastepny->SprawdzNazwisko(k->Nazwisko()) < 0)
+			else if (pomoc->Porownaj(p) == 0)
 			{
-				aktualny = nastepny;
-				nastepny = aktualny->m_pNastepny;
-				licznik++;
-			}
-			if (nastepny == nullptr)
-			{
-				aktualny->m_pNastepny = k;
-				k->m_pNastepny = nullptr;
-				m_nLiczbaPracownikow++;
+				cout << "Obiekt juz wystepuje" << endl;
 				return;
 			}
+			pop = pomoc;
+			pomoc = pomoc->m_pNastepny;
 		}
+		Pracownik *k = new Pracownik(p);
+		pop->m_pNastepny = k;
+		k->m_pNastepny = nullptr;
+		++m_nLiczbaPracownikow;
 	}
-
 }
 
 void ListaPracownik::WypiszPracownikow() const
@@ -97,7 +85,7 @@ void ListaPracownik::WypiszPracownikow() const
 		for (int i = 1; i <= m_nLiczbaPracownikow; i++)
 		{
 			cout << "Pracownik #" << i << ": ";
-			aktualny->Wypisz();
+			aktualny->WypiszDane();
 			aktualny = aktualny->m_pNastepny;
 		}
 	}
