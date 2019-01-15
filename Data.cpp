@@ -52,8 +52,14 @@ void Data::Wpisz()
 int Data::Porownaj(const Data & wzor) const
 {
 	if (this->Dzien() == m_nDzien && this->Miesiac() == m_nMiesiac && this->Rok() == m_nRok) return 0;
-	else if (this->Dzien() <= m_nDzien && this->Miesiac() <= m_nMiesiac && this->Rok() <= m_nRok) return 1;
-	else return -1;
+	//else if (this->Dzien() <= m_nDzien && this->Miesiac() <= m_nMiesiac && this->Rok() <= m_nRok) return 1;
+	//else return -1;
+	else if (this->Rok() > m_nRok) return 1;
+	else if (this->Rok() < m_nRok) return -1;
+	else if (this->Miesiac() > m_nMiesiac) return 1;
+	else if (this->Miesiac() < m_nMiesiac) return -1;
+	else if (this->Dzien() > m_nDzien) return 1;
+	else if (this->Dzien() < m_nDzien) return -1;
 }
 
 void Data::Koryguj()
@@ -66,10 +72,10 @@ void Data::Koryguj()
 		
 		 if (m_nRok % 4 == 0 && m_nRok % 100 != 0 || m_nRok % 400 == 0) {
 
-				if (m_nDzien > 29)m_nDzien = 29;
+				if (m_nDzien >= 29)m_nDzien = 29;
 
 			}
-		 if (m_nDzien > 29) m_nDzien = 28;
+		 if (m_nDzien >= 29) m_nDzien = 28;
 		}
 		
 	
