@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Kierownik.h" />
     <ClInclude Include="ListaPracownik.h" />
     <ClInclude Include="Napis.h" />
     <ClInclude Include="Pracownik.h" />
@@ -154,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Kierownik.cpp" />
     <ClCompile Include="ListaPracownik.cpp" />
     <ClCompile Include="Napis.cpp" />
     <ClCompile Include="Pracownik.cpp" />

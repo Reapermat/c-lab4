@@ -31,7 +31,8 @@ public:
 	bool operator==(const Pracownik & wzor) const;
 	friend ostream & operator<<(ostream & wy, const Pracownik & p);
 	friend istream & operator>>(istream& we, Pracownik &p);
-
+	virtual void WypiszDane();
+	virtual Pracownik* KopiaObiektu()const;
 };
 
 

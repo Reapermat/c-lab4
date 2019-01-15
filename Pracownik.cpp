@@ -112,9 +112,21 @@ bool Pracownik::operator==(const Pracownik & wzor) const
 		return false;
 }
 
+void Pracownik::WypiszDane()
+{
+	cout << "ID Zatrudnienia: " << m_nIDZatrudnienia << " " << m_Imie << " " << m_Nazwisko << " " << m_DataUrodzenia << endl;
+}
+
+Pracownik * Pracownik::KopiaObiektu() const
+{
+	Pracownik *Nowy_p;
+	Nowy_p = new Pracownik(*this);
+	return Nowy_p;
+}
+
 ostream & operator<<(ostream & wy, const Pracownik & p)
 {
-	wy << p.m_Imie << endl << p.m_Nazwisko << endl << p.m_DataUrodzenia;
+	wy << p.m_Imie << " " << p.m_Nazwisko << " " << p.m_DataUrodzenia;
 	return wy;
 }
 
